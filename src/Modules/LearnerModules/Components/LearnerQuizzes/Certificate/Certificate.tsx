@@ -12,15 +12,15 @@ import { useLocation} from "react-router-dom";
 
 export default function Certificate() {
   const { logedInData } = useAuth();
-  const{state:{score,title,total}} = useLocation()
+
+const x = useLocation()
+
+console.log(x)
+
+
+  const{state:{score,title}} = useLocation()
  const certificateRef = useRef<HTMLDivElement>(null);
 const buttonRef = useRef<HTMLButtonElement>(null);
- const percentage = total > 0 && score !== undefined
-    ? ((score / total) * 10).toFixed(0)
-    : "0";
-
-
-
 
 
 
@@ -50,12 +50,17 @@ const buttonRef = useRef<HTMLButtonElement>(null);
   if (buttonRef.current) buttonRef.current.style.display = "block";
 };
 
+
+
+
+
+
   return (
-    <div className=" w-full h-[600px] fixed top-0 left-[50%] -translate-x-[50%] z-20 flex justify-center items-center">
+    <div className=" w-full h-[600px] fixed top-0 left-[50%] -translate-x-[50%] z-20 overflow-y-auto flex justify-center items-center">
       <div
         ref={certificateRef}      
       
-      className="relative bg-white shadow-2xl border-8 border-purple-500 w-[1200px] h-[600px] rounded-3xl p-10 text-center font-serif">
+      className="relative bg-white shadow-2xl border-8 border-purple-500 w-[90%] min-h-[600px] rounded-3xl p-10 text-center font-serif">
         {/* Heading */}
         <div className="flex flex-col items-center mb-8">
           <FaAward className="text-5xl text-purple-600 mb-2" />
@@ -77,7 +82,7 @@ const buttonRef = useRef<HTMLButtonElement>(null);
           For successfully completing the quiz <q className="capitalize text-3xl font-black">{title?title:""}</q> and achieving a score of:
         </p>
         <div className="text-4xl text-green-600 font-bold my-4">
-          {percentage} %
+          {score} %
         </div>
 
         {/* CEO Info */}
