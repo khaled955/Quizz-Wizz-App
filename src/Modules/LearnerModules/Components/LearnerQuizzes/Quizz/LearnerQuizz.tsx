@@ -18,7 +18,6 @@ import { axiosInstance } from "../../../../../Services/axiosInstance"
 import { LearnerQuizQuestions } from "../../../../../Interfaces/LearnerQuiz.interface"
 import Loading from "../../../../SharedModules/Pages/Loading/Loading"
 import QuizzInstructions from "../QuizzInstructions/QuizzInstructions"
-import Certificate from "../Certificate/Certificate"
 
 
 
@@ -53,7 +52,6 @@ const[successIdAfterCodeEntry , setsuccessIdAfterCodeEntry] = useState< string |
 const[showScoreCard,setShowScoreCard] = useState(false)
 const[scoreData , setScoreData] = useState<LearnerQuizResult | null>(null)
 const[showInstructionsModel , setShowInstructionModel] = useState(false)
-const[showCertificate , setShowCertificate] = useState(false)
 const[totalQuestions , setTotalQuestions] = useState(0)
 const[scorePerQuestion,setScorePerQuestion] = useState(0)
 const[quizzTitle , setQuizzTitle] = useState<string | null>(null)
@@ -220,24 +218,15 @@ onSubmit={(data:LearnerQuizResult)=>{
 isOpen={showScoreCard}
 onClose={()=>{
   setShowScoreCard(false)
-  setShowCertificate(true)
 }}
 score={scoreData.score}
 total={totalQuestions * scorePerQuestion}
+title={quizzTitle}
 />}
 
 
 
-{/* Cerificate */}
-{showCertificate && <Certificate score={scoreData?.score} total={totalQuestions * scorePerQuestion} onClose={()=>{
-  setShowCertificate(false);
-    setScoreData(null)
 
-}} 
-
-title={quizzTitle!}
-
-/>}
 
 
     </div>

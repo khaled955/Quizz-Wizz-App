@@ -20,6 +20,7 @@ import LearnerResults from "./Modules/LearnerModules/Components/LearnerResults/L
 import ProtectedRoute from "./Modules/SharedModules/Components/ProtectedRoute/ProtectedRoute"
 import GuestRoute from "./Modules/SharedModules/Components/GuestRoute/GuestRoute"
 import LearnerQuizz from "./Modules/LearnerModules/Components/LearnerQuizzes/Quizz/LearnerQuizz"
+import Certificate from "./Modules/LearnerModules/Components/LearnerQuizzes/Certificate/Certificate"
 
 function App() {
 
@@ -49,6 +50,7 @@ const routes = createBrowserRouter([{path:"/" , element: <GuestRoute><AuthLayout
 {path:"learner" , element: <ProtectedRoute> <MasterLayout/></ProtectedRoute> , children:[
  { index:true , element:<LearnerDashboard/>},
  { path:"quizzes" , element:<LearnerQuizz/>},
+ { path:"certificate/:id" , element:<Certificate/>},
  { path:"results" , element:<LearnerResults/>},
  { path:"change-password" , element:<ChangePassword/>},
  { path:"*" , element:<NotFound/>},

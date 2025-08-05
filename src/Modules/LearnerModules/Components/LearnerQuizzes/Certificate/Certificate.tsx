@@ -5,48 +5,26 @@ import QRCode from 'react-qr-code';
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
-interface CertificateProps {
-  score: number | undefined;
-  total:number
-  onClose:()=>void;
-  title:string
-}
+import signatue from "../../../../../../public/images/signature-nadia.png"
+import { useLocation} from "react-router-dom";
 
 
 
-
-export default function Certificate({ score,total ,onClose,title}: CertificateProps) {
+export default function Certificate() {
   const { logedInData } = useAuth();
+  const{state:{score,title,total}} = useLocation()
  const certificateRef = useRef<HTMLDivElement>(null);
 const buttonRef = useRef<HTMLButtonElement>(null);
-
-
-
  const percentage = total > 0 && score !== undefined
-    ? ((score / total) * 100).toFixed(0)
+    ? ((score / total) * 10).toFixed(0)
     : "0";
 
 
-//   const handleDownload = async () => {
-//     if (!certificateRef.current) return;
-//     if (buttonRef.current) {
-//   buttonRef.current.style.display = "none";
-// }
-//     const canvas = await html2canvas(certificateRef.current);
-//     const imgData = canvas.toDataURL("image/png");
-//     const pdf = new jsPDF("landscape", "mm", "a4");
-//     const pdfWidth = pdf.internal.pageSize.getWidth();
-//     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-//     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-//     pdf.save(`QuizzWiz_Certificate_${name}.pdf`);
 
 
-// if (buttonRef.current) {
-//   buttonRef.current.style.display = "block";
-// }
 
-//   };
+
+
 
 
   const handleDownload = async () => {
@@ -73,7 +51,7 @@ const buttonRef = useRef<HTMLButtonElement>(null);
 };
 
   return (
-    <div className=" w-full h-[600px] fixed top-0 left-[50%] -translate-x-[50%] z-[99999] flex justify-center items-center">
+    <div className=" w-full h-[600px] fixed top-0 left-[50%] -translate-x-[50%] z-20 flex justify-center items-center">
       <div
         ref={certificateRef}      
       
@@ -96,25 +74,26 @@ const buttonRef = useRef<HTMLButtonElement>(null);
 
         {/* Achievement */}
         <p className="mt-4 text-gray-700 text-base sm:text-lg">
-          For successfully completing the quiz <q className="capitalize text-3xl font-black">{title}</q> and achieving a score of:
+          For successfully completing the quiz <q className="capitalize text-3xl font-black">{title?title:""}</q> and achieving a score of:
         </p>
         <div className="text-4xl text-green-600 font-bold my-4">
-          {percentage}%
+          {percentage} %
         </div>
 
         {/* CEO Info */}
-        <div className="mt-6">
+        <div className="mt-6 text-center flex flex-col items-center">
           <p className="text-gray-600 text-sm mb-1">Signed by</p>
           <p className="text-lg font-medium text-gray-800">
             Eng. Nadia Mohamed Taha – CEO, Quizz Wiz Academy
           </p>
+          <img className="size-24" src={signatue} alt="signature" />
         </div>
 
         {/* QR Code */}
         <div className="absolute bottom-6 right-6 flex flex-col items-center text-sm text-gray-600">
           <div className="bg-white p-1 rounded-md shadow-md">
             <QRCode
-              value={`https://www.quizzwiz.com/certificate/${logedInData?.profile?._id}`}
+              value={`${window.location.origin}/learner/certificate/${logedInData?.profile?._id}`}
               size={80}
               bgColor="#ffffff"
               fgColor="#000000"
@@ -144,7 +123,6 @@ const buttonRef = useRef<HTMLButtonElement>(null);
       ref={buttonRef}
       onClick={ async ()=>{
          await handleDownload() 
-        onClose()        
      }}
        className=" cursor-pointer mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md absolute bottom-3"     >
      Download PDF

@@ -24,13 +24,11 @@ interface QuizQuestionModalProps {
 export default function QuizQuestionModal({ onClose, onSubmit, quizId, onSet }: QuizQuestionModalProps) {
   const [questions, setQuestions] = useState<LearnerQuizQuestions | null>(null);
   const [counter, setCounter] = useState(0);
-  const [instructor, setInstructor] = useState<string | null>(null);
   const [durationPerQuestionInMinute, setDurationPerQuestionInMinute] = useState(0);
   const { handleSubmit, formState: { isSubmitting ,errors}, register, getValues } = useForm<QuizAnswerSubmission>();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { logedInData } = useAuth();
 
-  console.log(instructor)
 
 
 
@@ -109,7 +107,6 @@ const autoSubmit = useCallback(() => {
         const { data } = await axiosInstance.get(LEARNER.GET_QUESTIONS_WITHOUT_ANSWERS(quizId));
         setQuestions(data.data);
         onSet(data.data);
-        setInstructor(data.data.instructor);
         setDurationPerQuestionInMinute(data.data.duration);
 
         interval = setInterval(() => {

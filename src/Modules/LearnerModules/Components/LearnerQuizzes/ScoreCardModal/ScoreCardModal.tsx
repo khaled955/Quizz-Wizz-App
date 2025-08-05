@@ -1,15 +1,20 @@
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { FaTimes, FaMedal, FaSmile, FaRegSadTear, FaRegThumbsUp } from "react-icons/fa";
+import useAuth from "../../../../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 interface ScoreCardModalProps {
   isOpen: boolean;
   onClose: () => void;
   score: number;
   total: number;
+  title:string | null;
 }
 
-export default function ScoreCardModal({ isOpen, onClose, score, total}: ScoreCardModalProps) {
+export default function ScoreCardModal({ isOpen, onClose, score, total,title}: ScoreCardModalProps) {
+  const navigate = useNavigate()
+  const {logedInData} = useAuth()
   const percentage = total > 0 ? ((score / total) * 100).toFixed(0) : "0";
 
 
@@ -56,7 +61,10 @@ export default function ScoreCardModal({ isOpen, onClose, score, total}: ScoreCa
           </div>
 
           <button
-            onClick={onClose}
+            onClick={()=>{
+              onClose()
+              navigate(`/learner/certificate/${logedInData?.profile._id}`,{state:{score:percentage,title,total}})
+            }}
             className="mt-5 px-5 py-2 bg-main-color text-white rounded-lg hover:bg-main-hover transition"
           >
             Close
