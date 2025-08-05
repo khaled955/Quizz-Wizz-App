@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+
+
+
+@theme {
+  --color-main-color: #c5d86d; 
+  --color-main-border-color:#f3f4f6;
+}
+
+
+@layer components {
+  .form-control {
+    width: 100%;
+    padding: 6px 50px;
+    border: 2px solid white;
+    border-radius: 6px;
+    outline: none;
+  }
+
+
+ .auth-btn {
+    width: 100%;
+    padding: 6px;
+    border: 2px solid white;
+    border-radius: 6px;
+   text-align: center;
+   font-weight: 700;
+   margin-block:10px ;
+   background-color: white;
+   color: black;
+   cursor: pointer;
+  }
+
+
+
+}
+
+/* custome classes */
+.addBtn{
+  @apply rounded-3xl px-3 py-2 bg-white text-black font-medium border-2 cursor-pointer
+}
+
+.error-message{
+  @apply  text-red-700 text-sm 
+}
+
+
+/*  configuration of input */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* Side bar custome style */
+.outlet-collapse{
+    width: calc(100% - 250px);
+    margin-left: auto;
+    transition: all .5s;
+}
+
+
+   .css-dip3t8{
+    background-color: #1F263E;
+   }
+
+
+  
+
+
+
+
+   li.ps-menuitem-root:nth-child(1) a:hover{
+    background-color: transparent;
+   }
+
+
+
+
+
+.outlet-collapsed-style{
+      width: calc(100% - 250px);
+  transition: all .5s;
+  margin-left: auto;
+}
+
+
+
+
+.perspective {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.transform-style {
+  transform-style: preserve-3d;
+}
+
+
+
+
+
+
+
+
