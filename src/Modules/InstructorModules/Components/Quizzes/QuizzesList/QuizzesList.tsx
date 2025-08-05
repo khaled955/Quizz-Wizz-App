@@ -97,7 +97,7 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchCompletedQuizz()
 }else{
-    navigate("/dashboard")
+    navigate("/")
     return;
 }
 
