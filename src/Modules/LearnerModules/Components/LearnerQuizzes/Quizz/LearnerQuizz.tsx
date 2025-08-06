@@ -18,7 +18,7 @@ import { axiosInstance } from "../../../../../Services/axiosInstance"
 import { LearnerQuizQuestions } from "../../../../../Interfaces/LearnerQuiz.interface"
 import Loading from "../../../../SharedModules/Pages/Loading/Loading"
 import QuizzInstructions from "../QuizzInstructions/QuizzInstructions"
-
+import { RiNextjsFill } from 'react-icons/ri';
 
 
 
@@ -136,25 +136,26 @@ if(!upCommingQuizzList) return <Loading/>
 
       {/*  left side */}
       <div className=" col-span-12 md:col-span-6">
-          <h2 className="font-bold text-xl text-gray-500">Your Next Quizz</h2>
+          <h2 className="font-bold text-xl text-gray-500 dark:text-white flex items-center gap-3"> <RiNextjsFill className="text-3xl"/>Your Next Quizz</h2>
 
          {upCommingQuizzList.length > 0 ?upCommingQuizzList.sort((a,b)=> Number(new Date(a.schadule)) - Number(new Date(b.schadule))).map((quizz:UpcommingQuizzProps,index:number)=><div key={quizz._id}>
-           <div  className="border-[1px] border-main-border-color rounded-2xl my-3 justify-between flex items-center gap-2 overflow-hidden">
-            <div className="img">
-              <img className="size-24 object-cover" src={QuizzPhotoList[index]} alt="quizz-photo" />
+           <div  className="border-[1px] border-main-border-color rounded-2xl my-3 justify-center flex items-center gap-2 overflow-hidden flex-col sm:flex-row text-center">
+            <div className="img w-full sm:w-auto">
+              
+              <img className=" w-full sm:size-24 object-cover" src={QuizzPhotoList[index]} alt="quizz-photo" />
             </div>
             <div className="text grow">
-              <h3 className="font-bold text-lg text-gray-500 capitalize">{quizz.title}</h3>
-              <p className="text-sm"> Duration :{quizz.duration >1 ? quizz.duration + " Minutes":quizz.duration + " Minute"} </p>
-              <p>Schedule : <span className="text-gray-500">{new Date(quizz.schadule).toLocaleDateString()} - </span> <span className="text-gray-400">{new Date(quizz.schadule).toLocaleTimeString()}</span></p>
-              <p> Score Per Question: {quizz.score_per_question > 1 ?quizz.score_per_question +"  Points" :quizz.score_per_question+"  Point"}</p>
+              <h3 className="font-bold text-lg text-gray-500 capitalize dark:text-amber-400">{quizz.title}</h3>
+              <p className="text-sm"> <span className="font-bold">Duration :</span>{quizz.duration >1 ? quizz.duration + " Minutes":quizz.duration + " Minute"} </p>
+              <p><span className="font-bold">Schedule :</span> <span className="text-gray-500 dark:text-white">{new Date(quizz.schadule).toLocaleDateString()} - </span> <span className="text-gray-400 dark:text-amber-100">{new Date(quizz.schadule).toLocaleTimeString()}</span></p>
+              <p> <span className="font-bold">Score Per Question:</span> {quizz.score_per_question > 1 ?quizz.score_per_question +"  Points" :quizz.score_per_question+"  Point"}</p>
             </div>
             <div className="action-timer px-1">
               <CountDownTimer title={quizz.title} targetDate={quizz.schadule}  onShow={handleShowCouponModel} id={quizz._id} onSet={handleSetQuizId} onTitle={handleSetQuizzTitle}/>
             </div>
            </div>
          
-               </div>) :<p className="text-red-700 font-bold text-center border-2 border-main-border-color shadow-xl p-3 my-3"> No Upcomming Quizz Available Now</p>}
+               </div>) :<p className="text-gray-700 dark:text-white font-bold text-center border-2 border-main-border-color shadow-xl p-3 my-3"> No Upcomming Quizz Available Now</p>}
 
       </div>
 

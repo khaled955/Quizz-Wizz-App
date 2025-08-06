@@ -55,7 +55,7 @@ setDark(newTheme)
   <MySidebar darkMood={dark} handleToggleCollapse={handleToggleCollapse} isCollapsed={isCollapsed}/>
 </div>
 
-  <div className="grow" >
+  <div className={`grow dark:bg-gray-800 dark:text-white min-h-screen`}>
     <div className={`mt-20 py-3 w-full px-2 ${marginClass} ${marginClassFromSm}`}>
   <Navbar mode={dark} onToggleMode={handleToggleMode} handleToggleSideBar={handleToggleSideBar} showSideBar={showSideBar}/>
 <div className="flex overflow-x-hidden overflow-y-auto">

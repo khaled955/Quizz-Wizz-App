@@ -46,7 +46,7 @@ if(logedInData?.profile.role !== "Instructor"){
 if(!resultsList) return<Loading/>
   return (
     <div className="result-container">
-      <h2 className="text-gray-600 font-bold text-2xl flex items-center gap-2 mb-4"> <PiGraduationCapThin className='text-3xl'/>  Quizz-Results</h2>
+      <h2 className="text-gray-600 font-bold text-2xl flex items-center gap-2 mb-4 dark:text-white"> <PiGraduationCapThin className='text-3xl'/>  Quizz-Results</h2>
 
     { resultsList && resultsList?.length > 0 ?<div className='table-box'>
       <table className="table-auto w-full text-center">

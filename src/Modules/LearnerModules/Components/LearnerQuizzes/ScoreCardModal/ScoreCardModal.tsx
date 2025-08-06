@@ -37,7 +37,7 @@ export default function ScoreCardModal({ isOpen, onClose, score, total,title}: S
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 w-full max-w-md text-center relative"
+          className=" bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 w-full max-w-md text-center relative"
         >
           <button
             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-white"
@@ -48,7 +48,7 @@ export default function ScoreCardModal({ isOpen, onClose, score, total,title}: S
 
           <h2 className="text-2xl font-bold text-main-color mb-2">Quiz Result</h2>
 
-          <p className="text-gray-600 dark:text-gray-300 text-lg mb-1">
+          <p className="text-gray-600 dark:text-amber-400 text-lg mb-1">
             You scored <span className="font-bold text-main-color">{score}</span> out of {" "}
             <span className="font-bold">{total}</span>
           </p>

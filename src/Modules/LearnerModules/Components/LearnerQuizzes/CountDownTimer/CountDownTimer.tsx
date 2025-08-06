@@ -43,7 +43,7 @@ const CountDownTimer = ({ targetDate ,onShow,id,onSet,onTitle,title}: CountdownP
   const days = Math.floor(timeLeft / 1000 / 60 / 60 / 24);
 
   return (
-    <div className="text-sm font-semibold text-blue-600 relative">
+    <div className="text-sm font-semibold text-blue-600 dark:text-white relative">
       {!isTimeOut && timeLeft > 0 && (
         <p>{`${days}Day ${hours}h ${minutes}m ${seconds}s`}</p>
       )}
@@ -56,7 +56,7 @@ const CountDownTimer = ({ targetDate ,onShow,id,onSet,onTitle,title}: CountdownP
             onSet(id)
             onTitle(title)
           }}
-            className="px-3 py-1 rounded-xl bg-blue-600 text-white cursor-pointer"
+            className="px-3 py-1 rounded-xl bg-blue-600 text-white cursor-pointer dark:bg-amber-400"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

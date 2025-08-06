@@ -147,7 +147,7 @@ const autoSubmit = useCallback(() => {
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
-        className="bg-white dark:bg-gray-900 rounded-xl shadow-lg w-full max-w-3xl p-6 relative overflow-y-auto max-h-[90vh]"
+        className="bg-white dark:bg-gray-900 rounded-xl shadow-lg w-full max-w-3xl p-6 relative overflow-y-auto max-h-[90vh] border-[1px] border-black dark:border-white"
       >
         <audio ref={audioRef} src={alertAudio} preload="auto" />
         <button
@@ -161,7 +161,7 @@ const autoSubmit = useCallback(() => {
           <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
             Answer Questions ({questions.questions.length})
           </h2>
-          <span className="text-sm text-gray-600 dark:text-gray-400">
+          <span className="text-sm text-gray-600 dark:text-amber-400">
             Time Left: {minutes}:{seconds.toString().padStart(2, "0")}
           </span>
         </div>
@@ -186,7 +186,7 @@ const autoSubmit = useCallback(() => {
   </label>
 ))}
 {errors?.answers?.[index]?.answer && (
-  <p className="text-red-500 text-sm">{errors.answers[index]?.answer?.message}</p>
+  <p className="text-red-500 text-sm dark:text-white">{errors.answers[index]?.answer?.message}</p>
 )}
 
               </div>
