@@ -5,11 +5,18 @@ import { useCallback, useState } from "react";
 export default function MasterLayout() {
   const[isCollapsed , setIsCollapsed] = useState(false)
 const[showSideBar , setShowSideBar] = useState(false)
+const[dark , setDark] = useState<string | null>(()=>{
+ return  localStorage.getItem('theme')
+})
 
 
 
+const handleToggleMode = useCallback(function(){
+  const newTheme = localStorage.getItem("theme")==="light"?"dark":"light";
+  localStorage.setItem("theme" , newTheme)
+setDark(newTheme)
 
-
+},[])
 
 
 
@@ -42,15 +49,15 @@ const[showSideBar , setShowSideBar] = useState(false)
 <>
 
 
-<div className=" min-vh-screen flex p-0 overflow-hidden">
+<div className={`min-vh-screen flex p-0 overflow-hidden ${dark}`}>
 
 <div className={`${showSideBar ? "block":"hidden"} sm:block`}>
-  <MySidebar handleToggleCollapse={handleToggleCollapse} isCollapsed={isCollapsed}/>
+  <MySidebar darkMood={dark} handleToggleCollapse={handleToggleCollapse} isCollapsed={isCollapsed}/>
 </div>
 
   <div className="grow" >
     <div className={`mt-20 py-3 w-full px-2 ${marginClass} ${marginClassFromSm}`}>
-  <Navbar handleToggleSideBar={handleToggleSideBar} showSideBar={showSideBar}/>
+  <Navbar mode={dark} onToggleMode={handleToggleMode} handleToggleSideBar={handleToggleSideBar} showSideBar={showSideBar}/>
 <div className="flex overflow-x-hidden overflow-y-auto">
 <div className="w-full sm:w-[80%] overflow-y-auto">
       <Outlet></Outlet>

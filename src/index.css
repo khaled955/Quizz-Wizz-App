@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
+@custom-variant dark (&:where(.dark, .dark *));
 
 
 
@@ -43,6 +44,16 @@
   @apply rounded-3xl px-3 py-2 bg-white text-black font-medium border-2 cursor-pointer
 }
 
+.active-side-dark{
+  @apply  font-bold border-r-4 border-r-amber-400
+}
+
+.active-side-light{
+  @apply  font-bold border-r-4 border-r-black
+}
+
+
+
 .error-message{
   @apply  text-red-700 text-sm 
 }
@@ -65,9 +76,9 @@ input:-webkit-autofill:active {
 }
 
 
-   .css-dip3t8{
+ .css-dip3t8{
     background-color: #1F263E;
-   }
+   } 
 
 
   
@@ -143,6 +154,14 @@ input:-webkit-autofill:active {
     background-position: 0 50%,0 -2px,0 calc(100% + 2px),50% 50%,50% -2px,50% calc(100% + 2px),100% 50%,100% -2px,100% calc(100% + 2px);
  }
 }
+
+
+
+
+.side-bar-box button.active-dark{
+  border-right: 2px solid white;
+}
+
 
 
 

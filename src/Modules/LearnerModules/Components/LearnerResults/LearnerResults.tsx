@@ -60,7 +60,7 @@ if(!resultsList) return<Loading/>
         </thead>
 
 <tbody>
-  {resultsList.map((result:QuizResultData)=> <tr className='border-[1px]'>
+  {resultsList.map((result:QuizResultData)=> <tr key={result.quiz._id} className='border-[1px]'>
     <td className='capitalize py-1 font-medium'>{result.quiz.title}</td>
     <td>{result.quiz.questions_number}</td>
     <td>{result.result.score}</td>
