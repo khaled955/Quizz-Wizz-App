@@ -5,7 +5,6 @@ import toast from "react-hot-toast"
 import { axiosInstance } from "../../../../Services/axiosInstance"
 import { QUIZ } from "../../../../Services/endPoint"
 import useAuth from "../../../../Hooks/useAuth"
-import { useNavigate } from "react-router-dom"
 import { FaUserGraduate, FaClock, FaQuestionCircle, FaSortNumericUp, FaCheckCircle, FaAward } from "react-icons/fa";
 import Pagination from "../../../SharedModules/Components/Pagination/Pagination"
 import Loading from "../../../SharedModules/Pages/Loading/Loading"
@@ -20,8 +19,7 @@ export default function Results() {
 const[resultsList,setResultsList] = useState<ResultsProps[]| null>(null)
  const [currentPage,setCurrentPage] = useState(1);
 
-const{logedInData}= useAuth()
-const navigate = useNavigate()
+const{logedInData,logOut}= useAuth()
 
 
 
@@ -57,11 +55,11 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchAllResults()
 }else{
-    navigate("/dashboard")
+  logOut()
     return;
 }
 
-},[logedInData,navigate,fetchAllResults])
+},[logedInData,logOut,fetchAllResults])
 
 
 
@@ -82,7 +80,7 @@ if(logedInData?.profile.role === "Instructor"){
           >
             <div className="relative h-64 w-full text-white transition-transform duration-700 transform-style preserve-3d group-hover:rotate-y-180">
               {/* Front */}
-              <div className="absolute backface-hidden bg-gradient-to-br from-indigo-500 to-blue-600 p-4 rounded-xl h-full w-full flex flex-col items-center justify-center shadow-lg">
+              <div className="absolute backface-hidden bg-gradient-to-br from-indigo-500 to-blue-600  p-4 rounded-xl h-full w-full flex flex-col items-center justify-center shadow-lg">
                 <h3 className="text-2xl font-bold flex items-center gap-2">
                   <FaCheckCircle className="text-white" /> {quiz.title}
                 </h3>
@@ -118,7 +116,7 @@ if(logedInData?.profile.role === "Instructor"){
               </div>
             </div>
           </div>
-        )):<p className="text-xl text-red-700 text-center"> No Data Available Now</p>}
+        )):<p className="text-xl text-red-700 text-center dark:text-white"> No Data Available Now</p>}
       </div>
 
       { paginatedData && paginatedData?.length > 0 && <Pagination currentPage={currentPage} itemsPerPage={ITEMS_PER_PAGE} totalItems={resultsList?.length || 0}

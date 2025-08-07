@@ -17,7 +17,7 @@ export default function GroupAddAndUpdateCard({errorMessage,onClose,onCreate,tit
 
   const[isLoading , setIsLoading] = useState(false)
 
-const{logedInData} = useAuth()
+const{logedInData,logOut} = useAuth()
 
 const{register,handleSubmit,formState:{errors,isSubmitting},control,reset}= useForm<CreateGroupProps>({"mode":"onChange",defaultValues:{
   name:currentGroup?.name || "",
@@ -63,8 +63,13 @@ useEffect(() => {
     }
   }
 
-  if (logedInData?.profile.role === "Instructor") fetchStudents();
-}, [logedInData, title, currentGroup]);
+  if (logedInData?.profile.role === "Instructor") {
+    fetchStudents()
+  }else{
+    logOut()
+    return;
+  };
+}, [logedInData, title, currentGroup,logOut]);
 
 
 
@@ -104,7 +109,7 @@ useEffect(() => {
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center z-50 bg-gray-600/40 items-center">
-      <div className="form-box bg-white w-full sm:w-[40%] pb-5">
+      <div className="form-box bg-white w-full sm:w-[40%] pb-5 dark:bg-gray-600">
         <form onSubmit={handleSubmit((data)=>{
           if(title ==="Set up a new Group")onCreate(data)
             if(title === "Update Current Group" && currentGroup) onUpdate(data,currentGroup?._id)
@@ -124,7 +129,7 @@ useEffect(() => {
         <div className="form-inputs px-3 py-6">
           {/* group name input */}
           <div className="group-name border-[1px] border-main-border-color rounded-2xl flex overflow-hidden mb-1">
-            <label className="bg-[#ffeddf] p-3" htmlFor="groupName">Group Name</label>
+            <label className="bg-[#ffeddf] p-3 dark:bg-amber-400" htmlFor="groupName">Group Name</label>
             <input
             {...register("name",GROUP_MODULE.NAME)}
             className="border-0 outline-0 grow" type="text"  id="groupName"/>
@@ -149,11 +154,12 @@ useEffect(() => {
       students={studentsList}
       selected={value}
       onChange={onChange}
+      
     />
   )}
 />
  
-:<p className=" text-red-700 capitalize text-center"> No Students Available Now</p>}
+:<p className=" text-red-700 capitalize text-center dark:text-white"> No Students Available Now</p>}
 
 
         </div>

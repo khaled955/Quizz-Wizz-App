@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 import { axiosInstance } from '../../../../../Services/axiosInstance';
 import { QUESTION } from '../../../../../Services/endPoint';
 import useAuth from '../../../../../Hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import Loading from '../../../../SharedModules/Pages/Loading/Loading';
 import { FaEye } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
@@ -15,7 +14,7 @@ import Pagination from '../../../../SharedModules/Components/Pagination/Paginati
 import DeleteConfirmModal from '../../../../SharedModules/Components/ConfirmationModel/ConfirmationModel';
 import QuestionsDetailsModal from '../QuestionsDetailsModal/QuestionsDetailsModal';
 import QuestionsAddAndUpdateForm from '../QuestionsAddAndUpdateForm/QuestionsAddAndUpdateForm';
-
+import { AiOutlineBank } from 'react-icons/ai';
 
 
 const ITEMS_PER_PAGE = 6;
@@ -35,8 +34,7 @@ const[errorMessage , setErrorMessage] = useState(null)
 const [showAddAndUpdateForm,setShowAddAndUpdateForm] = useState(false)
 const[showQuestionDetails,setShowQuestionDetails] = useState(false)
 const[selectedQuestion , setSelectedQuestion] = useState<QuestionListProps | null>(null)
-const {logedInData} = useAuth()
-const navigate = useNavigate()
+const {logedInData,logOut} = useAuth()
 
 
 // fetch Questions
@@ -185,11 +183,11 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchQuestions()
 }else{
-    navigate("/dashboard")
+  logOut()
     return;
 }
 
-},[logedInData,navigate,fetchQuestions])
+},[logedInData,logOut,fetchQuestions])
 
 
 
@@ -221,7 +219,7 @@ if(!QuestionList) return <Loading/>
   return (
     <div className="questions-container">
       <div className="header flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center mb-3">
-        <h2 className="text-2xl font-bold">Bank Of Questions</h2>
+        <h2 className="text-2xl font-bold flex items-center gap-3"> <AiOutlineBank className='text-3xl'/> Bank Of Questions</h2>
         <button onClick={handleShowAddAndUpdateModel} className="addBtn"> <BiSolidPlusCircle className='inline text-xl'/> Add Question</button>
       </div>
 
@@ -233,7 +231,7 @@ if(!QuestionList) return <Loading/>
       <select onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>{
         setQuestionLevel(e.target.value)
         setCurrentPage(1)
-      }} defaultValue="" className='outline-0 border-2 rounded-2xl p-2 w-full'>
+      }} defaultValue="" className='outline-0 border-2 rounded-2xl p-2 w-full dark:bg-amber-400'>
       <option disabled value="">Filter By Level</option>
       <option  value="">All</option>
       <option value="easy">Easy</option>
@@ -248,7 +246,7 @@ if(!QuestionList) return <Loading/>
       <select onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>{
         setQuestionType(e.target.value)
         setCurrentPage(1)
-      }} defaultValue="" className='outline-0 border-2 rounded-2xl p-2 w-full'>
+      }} defaultValue="" className='outline-0 border-2 rounded-2xl p-2 w-full dark:bg-amber-400'>
       <option disabled value="">Filter By Type</option>
       <option  value="">All</option>
       <option value="FE">FE</option>
@@ -264,7 +262,7 @@ if(!QuestionList) return <Loading/>
 <div className="table-box text-center max-w-full">
   <table className='w-full'>
     <thead>
-      <tr className='bg-black text-white'>
+      <tr className='bg-black/20 text-white'>
         <th className=''>Title</th>
         <th className=''> Description</th>
         <th className=''> level</th>
@@ -274,8 +272,8 @@ if(!QuestionList) return <Loading/>
     </thead>
 <tbody>
  {paginatedData && paginatedData.length > 0 ? paginatedData?.map((question:QuestionListProps)=> <tr key={question._id}>
-    <td className='border-[1px] border-main-border-color mb-1 py-3'>{question.title}</td>
-    <td className='border-[1px] border-main-border-color mb-1'>{question.description}</td>
+    <td className='border-[1px] border-main-border-color mb-1 py-3 capitalize'>{question.title}</td>
+    <td className='border-[1px] border-main-border-color mb-1 capitalize'>{question.description}</td>
     <td className='border-[1px] border-main-border-color mb-1 p-4'>{question.difficulty}</td>
     <td className='border-[1px] border-main-border-color mb-1 px-4'>{question.type}</td>
     <td className='border-[1px] border-main-border-color mb-1'> <div className='flex gap-2 h-full px-2 text-gray-700 flex-wrap md:flex-nowrap'>
@@ -283,7 +281,7 @@ if(!QuestionList) return <Loading/>
       <FaEye onClick={()=>{
       setSelectedQuestion(question)
       setShowQuestionDetails(true)
-    }} className='cursor-pointer text-xl hover:text-blue-600 transition-colors duration-300'/> 
+    }} className='cursor-pointer text-xl hover:text-blue-600 transition-colors duration-300 dark:text-white'/> 
       
       <AiFillEdit onClick={()=>{
       setSelectedQuestion(question)
@@ -291,13 +289,13 @@ if(!QuestionList) return <Loading/>
       setShowAddAndUpdateForm(true)
     }} 
     
-    className='cursor-pointer text-xl hover:text-yellow-500 transition-colors duration-300'/>
+    className='cursor-pointer text-xl hover:text-yellow-500 transition-colors duration-300 dark:text-amber-400'/>
     
      <FaRegTrashCan onClick={()=>{
       setSelectedId(question._id)
        setShowDeletModel(true)
 
-    }} className='cursor-pointer text-xl hover:text-red-600 transition-colors duration-300'/></div>
+    }} className='cursor-pointer text-xl hover:text-red-600 transition-colors duration-300 dark:text-red-700'/></div>
      </td>
   </tr>) : <tr> <td colSpan={5} className='text-red-700 font-bold'> No Questions Available Now</td></tr>}
 </tbody>

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { BiSolidAlarmAdd } from 'react-icons/bi';
 import { BsBank, } from 'react-icons/bs';
 import { FaChevronCircleRight } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { CompletedQuizzProps, CreateAndUpdateQuizzProps, QuizResponseAfterCreateProps, UpcommingQuizzProps } from '../../../../../Interfaces/quizz.interface';
 import useAuth from '../../../../../Hooks/useAuth';
 import { isAxiosError } from 'axios';
@@ -19,8 +19,10 @@ import QuizzesAddAndUpdateForm from '../QuizzesAddAndUpdateForm/QuizzesAddAndUpd
 import QuizSuccessModal from '../QuizSuccessModal/QuizSuccessModal';
 import QuizzesDetails from '../QuizzesDetails/QuizzesDetails';
 import DeleteConfirmModal from '../../../../SharedModules/Components/ConfirmationModel/ConfirmationModel';
-
-
+import Pagination from '../../../../SharedModules/Components/Pagination/Pagination';
+import { FaTasks } from 'react-icons/fa';
+import { IoCheckmarkDoneCircle } from 'react-icons/io5';
+const ITEMS_PER_PAGE = 2;
 
 
 const quizzPhotosList = [photo1,photo2,photo3,photo4,photo5]
@@ -38,9 +40,9 @@ const[isLoading,setIsloading] = useState(false)
 const[showDeletModel,setShowDeletModel] = useState(false)
 const[successMessage , setSuccessMessage] = useState<QuizResponseAfterCreateProps | null>(null)
 const[showSuccess,setShowSuccess] = useState(false)
+ const [currentPage, setCurrentPage] = useState(1);
 
-const{logedInData} = useAuth()
-const navigate = useNavigate()
+const{logedInData,logOut} = useAuth()
 
 
 // fetch Upcomming Quizz
@@ -65,12 +67,12 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchUpCommingQuizz()
 }else{
-    navigate("/dashboard")
+  logOut()
     return;
 }
 
 
-},[fetchUpCommingQuizz , navigate,logedInData?.profile.role])
+},[fetchUpCommingQuizz ,logOut,logedInData?.profile.role])
 
 
 
@@ -97,12 +99,12 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchCompletedQuizz()
 }else{
-    navigate("/")
+  logOut()
     return;
 }
 
 
-},[fetchCompletedQuizz , navigate,logedInData?.profile.role])
+},[fetchCompletedQuizz , logOut,logedInData?.profile.role])
 
 
 
@@ -135,7 +137,6 @@ if(data.message === "Record updated successfully"){
 
 
   } catch (error) {
-    console.log(error)
     if(isAxiosError(error)){
       toast.error(error.response?.data.message || "Some Thing Go Wrong!")
       setErrorMessage(error.response?.data.message || "Some Thing Go Wrong!")
@@ -219,6 +220,11 @@ setTimeout(() => {
 
 
 
+// setting for pagination
+ const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedData = upcommingQuizzList?.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+
 
 
 
@@ -237,12 +243,12 @@ setTimeout(() => {
            setTitle("Set New Quizz")
         }} className=" cursor-pointer set-up-action p-9 border-[1px] border-main-border-color flex flex-col items-center gap-3">
               <BiSolidAlarmAdd className='text-3xl'/>
-              <span> SetUp New quiz</span>
+              <span className='font-black'> SetUp New quiz</span>
         </button>
 
           <Link to="/dashboard/questions-list" className='p-9 border-[1px] border-main-border-color flex flex-col gap-3 items-center'>
           <BsBank className='text-3xl'/>
-          <span>Question Bank</span>
+          <span className='font-black'>Question Bank</span>
           </Link>
 
       </div>
@@ -251,48 +257,48 @@ setTimeout(() => {
       <div className=" p-3 quizz-info col-span-12 md:col-span-6 border-[1px] border-main-border-color flex flex-col gap-3 ">
               {/* upcomming quizz */}
               <div className="up-comming-quizz">
-                <h2 className='mb-5 font-bold'>Upcoming quizzes</h2>
+                <h2 className='mb-5 font-bold flex items-center gap-3'> <FaTasks className='text-3xl'/> Upcoming quizzes</h2>
                   {upcommingQuizzList.length > 0 ?<div className='flex flex-col gap-3'>
-                        {upcommingQuizzList.map((quizz:UpcommingQuizzProps,index:number)=> <div key={quizz._id} className='border-[1px] border-main-border-color flex gap-1 '>
+                        {paginatedData?.map((quizz:UpcommingQuizzProps,index:number)=> <div key={quizz._id} className='border-[1px] border-main-border-color flex gap-1 '>
                             <div className="img-box">
                                 <img className='size-24 object-cover' src={quizzPhotosList[index]} alt={quizz.title} />
                             </div>
                              <div className="quizz-body flex justify-between items-center grow flex-wrap">
                               <div className='quizz-text grow'>
-                                <h3 className='font-black'>{quizz.title}</h3>
-                              <p className='text-gray-700'>{new Date(quizz.schadule).toLocaleDateString("en-GB", {day: "2-digit",month: "long",year: "numeric",})} | {new Date(quizz.schadule).toLocaleTimeString()}</p>
-                              <p>No. of Quesstions: <span>{quizz.questions_number}</span></p>
+                                <h3 className='font-black capitalize'>{quizz.title}</h3>
+                              <p className='text-gray-700 dark:text-white'>{new Date(quizz.schadule).toLocaleDateString("en-GB", {day: "2-digit",month: "long",year: "numeric",})} | {new Date(quizz.schadule).toLocaleTimeString()}</p>
+                              <p className='font-semibold'>No. of Quesstions: <span>{quizz.questions_number}</span></p>
 
                               </div>
                               <div className="arrow px-3">
                                 <FaChevronCircleRight onClick={()=>{
                                   setCurrentQuizz(quizz)
                                   setShowQuizzDetails(true)
-                                }} className='text-3xl text-red-700 cursor-pointer'/>
+                                }} className='text-3xl text-red-700 cursor-pointer dark:text-blue-600'/>
                               </div>
 
                              </div>
                         </div>)}
                     
-                  </div>  : <p className='text-gray-600 text-center'> No Upcomming Quizz Now </p>}
+                  </div>  : <p className='text-gray-600 text-center dark:text-white font-bold border-2 border-main-border-color'> No Upcomming Quizz Now </p>}
               </div>
               
-              <hr className='text-gray-500'/>
+              <hr className='text-gray-500 dark:text-amber-400'/>
               {/* completed quizz */}
               <div className="completed-qizz">
-                <h2 className='font-black my-4'>Completed Quizz</h2>
+                <h2 className='font-black my-4 flex items-center gap-3'> <IoCheckmarkDoneCircle className='text-3xl'/>Completed Quizz</h2>
                  {completedQuizz.length > 0 ?   <table className='w-full'>
                   <thead>
                  <tr className='text-white border-[1px] border-main-border-color'>
-                     <th className='bg-black'>Title</th>
-                    <th className='bg-black'> Questions No</th>
-                    <th className='bg-black'> No Of Participate</th>
-                    <th className='bg-black'>Duration</th>
+                     <th className='bg-black/50'>Title</th>
+                    <th className='bg-black/50'> Questions No</th>
+                    <th className='bg-black/50'> No Of Participate</th>
+                    <th className='bg-black/50'>Duration</th>
                  </tr>
                   </thead>
                    <tbody>
                     {completedQuizz.map((quizz:CompletedQuizzProps)=> <tr key={quizz._id} className='text-center border-[1px] border-main-border-color'>
-                     <td>{quizz.title}</td>
+                     <td className='capitalize font-semibold'>{quizz.title}</td>
                      <td>{quizz.questions_number}</td>
                      <td>{quizz.participants}</td>
                      <td>{quizz.duration} minutes</td>
@@ -300,10 +306,14 @@ setTimeout(() => {
                    </tbody>
 
 
-                </table> :<p> No Data Available Now</p>}
+                </table> :<p className='text-gray-600 text-center dark:text-white font-bold border-2 border-main-border-color'> No Completed Quizz Now </p>}
               
               </div>
+
+              {paginatedData && paginatedData.length > 0 && <Pagination currentPage={currentPage} itemsPerPage={ITEMS_PER_PAGE} onPageChange={setCurrentPage} totalItems={upcommingQuizzList.length || 0}/>
+}
       </div>
+
 
 
 

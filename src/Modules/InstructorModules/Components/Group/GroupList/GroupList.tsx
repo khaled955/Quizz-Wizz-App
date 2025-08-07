@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import GroupListCard from "../GroupListCard/GroupListCard";
-import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 import GroupAddAndUpdateCard from "../GroupAddAndUpdateCard/GroupAddAndUpdateCard";
@@ -11,7 +10,7 @@ import { GROUP } from "../../../../../Services/endPoint";
 import Loading from "../../../../SharedModules/Pages/Loading/Loading";
 import Pagination from "../../../../SharedModules/Components/Pagination/Pagination";
 import DeleteConfirmModal from "../../../../SharedModules/Components/ConfirmationModel/ConfirmationModel";
-
+import { FaLayerGroup } from 'react-icons/fa';
 
 
 
@@ -28,8 +27,7 @@ const[errorMessage , setErrorMessage] = useState(null)
 const[isLoading , setIsLoading] = useState(false)
 const[selectGroupId , setSelectedGroupId] = useState<string| null>(null)
 const[currentGroup,setCurrentGroup] = useState<Group | null>(null)
-const navigate = useNavigate()
-const{logedInData} = useAuth()
+const{logedInData,logOut} = useAuth()
 
 
 
@@ -175,11 +173,11 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchGroups()
 }else{
-    navigate("/dashboard")
+  logOut()
     return;
 }
 
-},[logedInData,navigate,fetchGroups])
+},[logedInData,logOut,fetchGroups])
 
 
 // event handler
@@ -202,7 +200,7 @@ if(!paginatedData) return <Loading/>
       {/* body of component */}
     <div className="group-list-box rounded-2xl px-4 border-[1px] border-[#f3f4f6] mt-4 py-6">
 
-      <span className="inline-block text-xl mb-4 font-bold">Group List</span>
+      <span className=" text-xl mb-4 font-bold flex items-center gap-3"> <FaLayerGroup className="text-3xl"/>Group List</span>
 
 {/*  display data */}
 {paginatedData.length > 0 ? <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -216,7 +214,7 @@ onUpdate={(currentGroup:Group)=>{setCurrentGroup(currentGroup)
   setShowAddAndUpdateCard(true)
 }}
 key={group._id} groupInfo={group}/>)}
-</div>:<p className="text-center text-lg font-bold text-gray-500"> No Groups Available Now</p>}
+</div>:<p className="text-center text-lg font-bold text-gray-500 dark:text-white"> No Groups Available Now</p>}
 
 <Pagination currentPage={currentPage} itemsPerPage={ITEMS_PER_PAGE} onPageChange={setCurrentPage} totalItems={groupList?.length || 0}/>
     </div>

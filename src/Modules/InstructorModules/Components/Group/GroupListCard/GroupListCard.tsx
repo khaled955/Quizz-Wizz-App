@@ -9,7 +9,7 @@ export default function GroupListCard({groupInfo,onDelete,onUpdate}:GroupCardPro
 
            {/* header text */}
           <div className="text-body">
-            <h2 className="text-lg font-medium">Group: <span className="text-sm font-light text-gray-600">{groupInfo.name}</span></h2>
+            <h2 className="text-lg font-medium">Group: <span className="text-sm text-gray-600 dark:text-amber-400 font-bold">{groupInfo.name}</span></h2>
             <p className="">No Of Students: <span className="text-sm text-gray-600">{groupInfo.students.length}</span></p>
         </div>
      

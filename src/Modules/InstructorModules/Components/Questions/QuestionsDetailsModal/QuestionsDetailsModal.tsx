@@ -117,52 +117,52 @@ const QuestionsDetailsModal = ({ question, isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4 sm:px-6">
+    <div className="fixed inset-0 z-50 bg-black/20 flex items-center justify-center px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        className="bg-white rounded-2xl shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative"
+        className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl"
+          className="absolute top-3 right-3 text-gray-500 dark:bg-white cursor-pointer hover:text-red-500 text-xl"
         >
           <MdClose />
         </button>
 
         {/* Header */}
         <h2 className="text-xl font-bold mb-4 text-primary flex items-center gap-2">
-          <FaTimesCircle className="text-green-500" />
+          <FaTimesCircle className="text-green-500 dark:text-white" />
           Question Details
         </h2>
 
         {/* Question Info */}
-        <div className="space-y-3 text-left text-gray-700 text-sm break-words">
+        <div className="space-y-3 text-left text-gray-700 dark:text-white text-sm break-words">
           <p>
-            <span className="font-semibold">Title:</span> {question.title}
+            <span className=" capitalize font-bold">Title:</span> {question.title}
           </p>
           <p>
-            <span className="font-semibold">Description:</span>{" "}
+            <span className=" capitalize font-bold">Description:</span>{" "}
             {question.description}
           </p>
           <p>
-            <span className="font-semibold">Difficulty:</span>{" "}
+            <span className=" capitalize font-bold">Difficulty:</span>{" "}
             {question.difficulty}
           </p>
           <p>
-            <span className="font-semibold">Type:</span> {question.type}
+            <span className="capitalize font-bold">Type:</span> {question.type}
           </p>
           <p>
-            <span className="font-semibold">Points:</span> {question.points}
+            <span className="capitalize font-bold">Points:</span> {question.points}
           </p>
           <p>
-            <span className="font-semibold">Status:</span>{" "}
+            <span className="capitalize font-bold">Status:</span>{" "}
             <span
               className={`inline-block px-2 py-1 rounded text-white text-sm ${
                 question.status === "active"
-                  ? "bg-green-600"
+                  ? "bg-green-600 dark:bg-amber-400"
                   : "bg-gray-400"
               }`}
             >
@@ -180,8 +180,8 @@ const QuestionsDetailsModal = ({ question, isOpen, onClose }: Props) => {
                 key={key}
                 className={`flex justify-between items-center border rounded px-4 py-2 ${
                   question.answer === key
-                    ? "bg-green-100 border-green-500"
-                    : "bg-gray-50 border-gray-300"
+                    ? "bg-green-100 border-green-500 dark:bg-amber-400"
+                    : "bg-gray-50 border-gray-300 dark:bg-blue-500"
                 }`}
               >
                 <span className="font-semibold">{key}:</span>

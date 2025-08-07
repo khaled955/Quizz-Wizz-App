@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { QUESTION, QUIZ, STUDENT } from "../../../../Services/endPoint";
 import { StudentWithGroup } from "../../../../Interfaces/Dashboard.interface";
+import useAuth from "../../../../Hooks/useAuth";
 
 const Dashboard = () => {
   const [quizzesList, setQuizzesList] = useState<CompletedQuizzProps[]>([]);
@@ -24,6 +25,9 @@ const Dashboard = () => {
   const [easyQuestions, setEasyQuestions] = useState(0);
   const [mediumQuestions, setMediumQuestions] = useState(0);
   const [topFiveStudents, setTopFiveStudents] = useState<StudentWithGroup[]>([]);
+const{logedInData , logOut} = useAuth()
+
+
 
   const fetchAllQuizzes = useCallback(async () => {
     try {
@@ -40,7 +44,6 @@ const Dashboard = () => {
       setTopFiveStudents(data);
     } catch (error) {
 
-      console.log(error)
       if (isAxiosError(error)) toast.error(error.response?.data.message || "Something went wrong");
     }
   }, []);
@@ -60,11 +63,26 @@ const Dashboard = () => {
     }
   }, []);
 
+
+
   useEffect(() => {
-    fetchAllQuizzes();
+    
+
+
+if(logedInData?.profile.role === "Instructor"){
+
+
+  fetchAllQuizzes();
     fetchTopFiveStudents();
     fetchDifficultyCounts();
-  }, [fetchAllQuizzes, fetchTopFiveStudents, fetchDifficultyCounts]);
+}else{
+  logOut()
+    return;
+}
+
+
+
+  }, [fetchAllQuizzes, fetchTopFiveStudents, fetchDifficultyCounts,logedInData?.profile.role,logOut]);
 
   const quizzes = useMemo(() => {
     return quizzesList.map((quizz) => ({
@@ -94,12 +112,24 @@ const Dashboard = () => {
     },
   ];
 
-  const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"];
+
+
+
+const colors = 
+  window.matchMedia?.("(prefers-color-scheme: dark)")?.matches
+    ? ["#fbbf24", "#fb923c", "#f472b6", "#a78bfa", "#60a5fa"] // vibrant for dark mode
+    : ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"]; // pastel for light mode
+
+
 
   return (
     <div className="p-4 grid gap-8 grid-cols-1 md:grid-cols-2">
+
+
+
       {/* Quiz Stats */}
-      <div className="shadow-lg p-4 rounded-xl bg-white dark:bg-gray-800">
+
+     {quizzes.length > 0 &&  <div className="shadow-lg p-4 rounded-xl bg-white dark:bg-gray-800">
         <h2 className="text-xl font-bold mb-2 text-gray-700 dark:text-white">Quiz Stats</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={quizzes}>
@@ -107,11 +137,11 @@ const Dashboard = () => {
             <YAxis stroke="#888" />
             <Tooltip />
             <Legend />
-            <Bar dataKey="questionNumber" fill="#8884d8" />
+            <Bar dataKey="questionNumber" fill={colors[1]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
-
+}
       {/* Question Difficulties */}
       <div className="shadow-lg p-4 rounded-xl bg-white dark:bg-gray-800">
         <h2 className="text-xl font-bold mb-2 text-gray-700 dark:text-white">Question Difficulties</h2>
@@ -143,7 +173,7 @@ const Dashboard = () => {
             <XAxis type="number" stroke="#888" />
             <YAxis dataKey="name" type="category" stroke="#888" />
             <Tooltip />
-            <Bar dataKey="score" fill="#ffc658" />
+            <Bar dataKey="score" fill={colors[0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

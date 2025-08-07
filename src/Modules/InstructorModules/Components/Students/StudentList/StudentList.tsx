@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 import useAuth from "../../../../../Hooks/useAuth";
@@ -11,7 +10,7 @@ import { StudentListWithGroupsProps } from "../../../../../Interfaces/Student.in
 import { STUDENT } from "../../../../../Services/endPoint";
 import StudentListCard from "../StudentListCard/StudentListCard";
 import StudentCardModal from "../StudentCardModal/StudentCardModal";
-
+import { PiStudentBold } from 'react-icons/pi';
 
 
 
@@ -29,8 +28,7 @@ const[currentStudent,setCurrentStudent] = useState<StudentListWithGroupsProps | 
 const[orignalStudentList , setOriginalStudentList] = useState<StudentListWithGroupsProps[] | null>(null)
 const [searchValue, setSearchValue] = useState("");
 
-const navigate = useNavigate()
-const{logedInData} = useAuth()
+const{logedInData,logOut} = useAuth()
 
 
 
@@ -105,11 +103,11 @@ useEffect(()=>{
 if(logedInData?.profile.role === "Instructor"){
     fetchStudents()
 }else{
-    navigate("/dashboard")
+  logOut()
     return;
 }
 
-},[logedInData,navigate,fetchStudents])
+},[logedInData,logOut,fetchStudents])
 
 
 
@@ -148,7 +146,7 @@ if(!paginatedData) return <Loading/>
       {/* body of component */}
     <div className="group-list-box rounded-2xl px-4 border-[1px] border-[#f3f4f6] mt-4 py-6">
 
-      <span className="inline-block text-xl mb-4 font-bold">Student List</span>
+      <span className=" text-xl mb-4 font-bold flex items-center gap-3"> <PiStudentBold className="text-3xl"/>Student List</span>
 
 <div className="search-input mb-3">
   <input    onChange={(e) => setSearchValue(e.target.value)}
@@ -169,7 +167,7 @@ onShow={()=>{
   setShowStudentCardModal(true)
 }}
 key={student._id} studentInfo={student}/>)}
-</div>:<p className="text-center text-lg font-bold text-gray-500"> No Students Available Now</p>}
+</div>:<p className="text-center text-lg font-bold text-gray-500 dark:text-white"> No Students Available Now</p>}
 
 
 {paginatedData.length > 0 && <Pagination currentPage={currentPage} itemsPerPage={ITEMS_PER_PAGE} onPageChange={setCurrentPage} totalItems={orignalStudentList?.length || 0}/>

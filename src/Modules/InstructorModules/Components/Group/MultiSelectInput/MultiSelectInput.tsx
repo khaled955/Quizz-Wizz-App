@@ -22,7 +22,7 @@ export default function MultiSelectInput({
       {() => (
         <div className="relative mt-2 border border-main-border-color rounded-2xl">
           {/* Button */}
-          <Listbox.Button className="relative w-full cursor-pointer rounded-md border-none bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus:ring-1 focus:ring-amber-500 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-pointer rounded-md border-none bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus:ring-1 focus:ring-amber-500 sm:text-sm dark:bg-blue-600">
             {selected.length > 0
               ? `${selected.length} student(s) selected`
               : "Select Students"}
@@ -32,7 +32,7 @@ export default function MultiSelectInput({
           </Listbox.Button>
 
           {/* Dropdown */}
-          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none">
+          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none dark:text-gray-600">
             {students.map((student) => (
               <Listbox.Option key={student._id} value={student._id} as={Fragment}>
                 {({ active, selected }) => (

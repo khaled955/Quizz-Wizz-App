@@ -21,9 +21,12 @@ import ProtectedRoute from "./Modules/SharedModules/Components/ProtectedRoute/Pr
 import GuestRoute from "./Modules/SharedModules/Components/GuestRoute/GuestRoute"
 import LearnerQuizz from "./Modules/LearnerModules/Components/LearnerQuizzes/Quizz/LearnerQuizz"
 import Certificate from "./Modules/LearnerModules/Components/LearnerQuizzes/Certificate/Certificate"
+import StatusIndicator from "./Modules/SharedModules/Components/StatusIndicator/StatusIndicator"
+import useOnlineStatus from "./Hooks/useOnlineStatus"
 
 function App() {
 
+const isOnline = useOnlineStatus()
 const routes = createBrowserRouter([{path:"/" , element: <GuestRoute><AuthLayout/></GuestRoute> ,children:[
   {index:true , element:<Login/>},
   {path:"login" , element:<Login/>},
@@ -74,6 +77,8 @@ const routes = createBrowserRouter([{path:"/" , element: <GuestRoute><AuthLayout
      <RouterProvider router={routes}></RouterProvider>
 </AuthContextProvider>
     <Toaster/>
+    {!isOnline &&     <StatusIndicator/>
+}
     </>
   )
 }

@@ -44,13 +44,13 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center z-50 bg-gray-600/40 items-start overflow-y-auto">
-      <div className="form-box bg-white w-full sm:w-[60%] pb-5 mt-6">
+      <div className="form-box bg-white w-full sm:w-[60%] pb-5 mt-6 dark:bg-gray-600 dark:border-white dark:border-2">
         <form onSubmit={handleSubmit((data)=>{
           if(title ==="Set up a new Question")onCreate(data)
             if(title === "Update Current Question" && currentQuestion) onUpdate(data,currentQuestion?._id)
         })}>
         <div className="form-header flex justify-between border-[1px] border-main-border-color items-center">
-            <h2 className="px-3 font-bold capitalize text-gray-600 text-2xl">{title}</h2>
+            <h2 className="px-3 font-bold capitalize text-gray-600 text-2xl dark:text-white">{title}</h2>
             <div className="act-btn flex">
                 <button disabled={isSubmitting} type="submit" className="true-btn p-3 border-l-[1px] border-main-border-color">
                   <FaCheck className="cursor-pointer text-2xl"/>
@@ -69,12 +69,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
           {/* title input */}
        <div className="title-input-box">
            <div className="title-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold">Title:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">Title:</span>
             <input
             {...register("title" ,{required:"Title Is Required"})}
             className="border-0 outline-0 grow" type="text"/>
           </div>
-           {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
+           {errors.title && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.title.message}</p>}
 
        </div>
 
@@ -82,12 +82,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
       {/* Description input */}
        <div className="description-input-box mt-3">
            <div className="description-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold flex items-center">Description:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold flex items-center dark:bg-amber-400">Description:</span>
             <textarea
             {...register("description" ,{required:"Description Is Required"})}
             className="border-0 outline-0 grow h-[60px] resize-none"></textarea>
           </div>
-           {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
+           {errors.description && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.description.message}</p>}
 
        </div>
 
@@ -99,12 +99,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
        {/* A input */}
          <div className="a-input-box grow">
            <div className="a-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold">A:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">A:</span>
             <input
             {...register("options.A" ,{required:"Value Is Required"})}
             className="border-0 outline-0 grow" type="text"/>
           </div>
-           {errors.options?.A && <p className="text-red-500 text-sm mt-1">{errors.options.A.message}</p>}
+           {errors.options?.A && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.options.A.message}</p>}
 
        </div>
 
@@ -113,12 +113,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
              {/* B input */}
          <div className="b-input-box grow">
            <div className="b-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold">B:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">B:</span>
             <input
             {...register("options.B" ,{required:"Value Is Required"})}
             className="border-0 outline-0 grow" type="text"/>
           </div>
-           {errors.options?.B && <p className="text-red-500 text-sm mt-1">{errors.options.B.message}</p>}
+           {errors.options?.B && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.options.B.message}</p>}
 
        </div>
          </div>
@@ -131,12 +131,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
        {/* C input */}
          <div className="c-input-box grow">
            <div className="c-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold">C:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">C:</span>
             <input
             {...register("options.C" ,{required:"Value Is Required"})}
             className="border-0 outline-0 grow" type="text"/>
           </div>
-           {errors.options?.C && <p className="text-red-500 text-sm mt-1">{errors.options.C.message}</p>}
+           {errors.options?.C && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.options.C.message}</p>}
 
        </div>
 
@@ -145,12 +145,12 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
              {/* D input */}
          <div className="d-input-box grow">
            <div className="d-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold">D:</span>
+            <span className="px-6 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">D:</span>
             <input
             {...register("options.D" ,{required:"Value Is Required"})}
             className="border-0 outline-0 grow" type="text"/>
           </div>
-           {errors.options?.D && <p className="text-red-500 text-sm mt-1">{errors.options.D.message}</p>}
+           {errors.options?.D && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.options.D.message}</p>}
 
        </div>
          </div>
@@ -159,7 +159,7 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
            <div className="question-type-answer-level-box flex gap-2 items-center flex-wrap justify-center mt-3">
             {/* Answer Input */}
                <div className="answer-box grow">
-                    <select defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-amber-400"
                     {...register("answer",{required:"Right Answer Is Required"})}
                     >
                       <option disabled value=""> Select Right Answer</option>
@@ -168,13 +168,13 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
                       <option value="C">C</option>
                       <option value="D">D</option>
                     </select>
-                    {errors.answer && <p className="text-red-500 text-sm mt-1">{errors.answer.message}</p>}
+                    {errors.answer && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.answer.message}</p>}
                </div>
 
 
                  {/* type Input */}
                <div className="type-box grow">
-                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-amber-400"
                     {...register("type",{required:"Question Type Is Required"})}
                     >
                       <option disabled value=""> Select Question Type</option>
@@ -182,13 +182,13 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
                       <option value="BE">BE</option>
                       <option value="DO">DO</option>
                     </select>
-                    {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>}
+                    {errors.type && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.type.message}</p>}
                </div>
 
 
                  {/* level Input */}
                <div className="level-box grow">
-                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-amber-400"
                     {...register("difficulty",{required:"Question Level Is Required"})}
                     >
                       <option disabled value=""> Select Question Level</option>
@@ -196,7 +196,7 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
                       <option value="medium">Medium</option>
                       <option value="hard">Hard</option>
                     </select>
-                    {errors.difficulty && <p className="text-red-500 text-sm mt-1">{errors.difficulty.message}</p>}
+                    {errors.difficulty && <p className="text-red-500 text-sm mt-1 dark:text-white">{errors.difficulty.message}</p>}
                </div>
 
 
@@ -213,7 +213,7 @@ const{register,handleSubmit,formState:{errors,isSubmitting}}= useForm<CreateAndU
 
 {/* end of form */}
    </div> 
-{errorMessage && <p className="error-message text-black text-center mb-3 ml-3">{errorMessage}</p>}
+{errorMessage && <p className="error-message text-black text-center mb-3 ml-3 dark:text-white font-bold">{errorMessage}</p>}
       </form>
       </div>
     </div>

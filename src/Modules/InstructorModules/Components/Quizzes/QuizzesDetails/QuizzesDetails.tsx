@@ -32,7 +32,7 @@ export default function QuizzesDetails({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl"
+          className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl dark:text-white dark:hover:text-white cursor-pointer"
         >
           <MdClose />
         </button>

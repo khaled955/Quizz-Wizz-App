@@ -33,14 +33,14 @@ export default function StudentListCard({index,onDelete,onShow,studentInfo}:Stud
               <img className="size-24" src={studentsAvatar[index] || photo1} alt="avatar" />
              </div>
              <div>
-              <p className="text-sm text-gray-500 capitalize"> <span>{studentInfo.first_name}</span> <span>{studentInfo.last_name}</span>
+              <p className="text-sm text-gray-500 capitalize dark:text-amber-400 font-bold"> <span>{studentInfo.first_name}</span> <span>{studentInfo.last_name}</span>
 </p>
              </div>
              </div>
 
               {/* header text */}
              <div className="text-body">
-               <h2 className=" font-medium">Group: <span className="text-sm font-light text-gray-600">{studentInfo.group?.name ||"Un Known Group"}</span></h2>
+               <h2 className=" font-medium">Group: <span className="text-sm font-light text-gray-600 dark:text-blue-500">{studentInfo.group?.name ||"Un Known Group"}</span></h2>
                <p className="text-sm">{studentInfo.group.students.length}-{studentInfo.group.students.length === 1 ?"Student":"Students"}</p>
            </div>
         

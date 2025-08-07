@@ -73,13 +73,13 @@ const minDateValue = minDate.toISOString().slice(0, 16);
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center z-50 bg-gray-600/40 items-start overflow-y-auto">
-      <div className="form-box bg-white w-full sm:w-[80%] pb-5 mt-6">
+      <div className="form-box bg-white w-full sm:w-[80%] pb-5 mt-6 dark:bg-gray-700 border-[1px] border-gray-700 dark:border-main-border-color">
         <form onSubmit={handleSubmit((data)=>{
           if(title ==="Set New Quizz")onCreate(data)
             if(title === "Update Current Quizz" && currentQuizz) onUpdate(data,currentQuizz?._id)
         })}>
         <div className="form-header flex justify-between border-[1px] border-main-border-color items-center">
-            <h2 className="px-3 font-bold capitalize text-gray-600 text-2xl">{title}</h2>
+            <h2 className="px-3 font-bold capitalize text-gray-600 text-2xl dark:text-white">{title}</h2>
             <div className="act-btn flex">
                 <button disabled={isSubmitting} type="submit" className="true-btn p-3 border-l-[1px] border-main-border-color">
                   <FaCheck className="cursor-pointer text-2xl"/>
@@ -98,7 +98,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
           {/* title input */}
        <div className="title-input-box">
            <div className="title-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-1 py-2 mr-2 bg-main-border-color font-bold">Title:</span>
+            <span className="px-1 py-2 mr-2 bg-main-border-color font-bold dark:bg-amber-400">Title:</span>
             <input
             {...register("title" ,QUIZZ_MODULE.QUIZZ_TITLE)}
             className="border-0 outline-0 grow" type="text"/>
@@ -115,7 +115,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
         {/* duration input */}
          <div className="duration-input-box grow">
            <div className="border-[2px] border-main-border-color rounded-2xl flex overflow-hidden ">
-            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm">Duration (in Minutes):</span>
+            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm dark:bg-amber-400">Duration (in Minutes):</span>
             <input
             {...register("duration" ,QUIZZ_MODULE.QUIZZ_DURATION)}
             className="border-0 outline-0 grow" type="number"/>
@@ -128,7 +128,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
 
          <div className="question-number-input-box grow">
            <div className="border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm">Questions Number:</span>
+            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm dark:bg-amber-400">Questions Number:</span>
             <input
             {...register("questions_number" ,QUIZZ_MODULE.QUIZZ_QUESTION_NUMBER)}
             className="border-0 outline-0 grow" type="number"/>
@@ -149,7 +149,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
         {/* schedule input */}
          <div className="schedule-input-box grow">
            <div className="border-[2px] border-main-border-color rounded-2xl flex overflow-hidden ">
-            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm">Schedule:</span>
+            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm dark:bg-amber-400">Schedule:</span>
             <input
             min={minDateValue}
             {...register("schadule" , QUIZZ_MODULE.QUIZZ_SCHEDULE)}
@@ -163,7 +163,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
 
          <div className="question-number-input-box grow">
            <div className="border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm">Score Per Question:</span>
+            <span className="px-1 font-bold py-2 mr-2 bg-main-border-color text-sm dark:bg-amber-400">Score Per Question:</span>
             <input
             {...register("score_per_question" ,QUIZZ_MODULE.QUIZZ_SCORE_PER_QUESTION)}
             className="border-0 outline-0 grow" type="number"/>
@@ -183,7 +183,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
       {/* Description input */}
        <div className="description-input-box mt-3">
            <div className="description-name border-[2px] border-main-border-color rounded-2xl flex overflow-hidden">
-            <span className="px-1 py-2 mr-2 bg-main-border-color font-bold flex items-center">Description:</span>
+            <span className="px-1 py-2 mr-2 bg-main-border-color font-bold flex items-center dark:bg-amber-400">Description:</span>
             <textarea
             {...register("description" ,{required:"Description Is Required"})}
             className="border-0 outline-0 grow h-[60px] resize-none"></textarea>
@@ -202,7 +202,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
            <div className="question-type-answer-level-box flex gap-2 items-center flex-wrap justify-center mt-3">
             {/* Group Input */}
               {groupList.length > 0 &&  <div className="group-box grow">
-                    <select defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-gray-700"
                     {...register("group",{required:"Group Is Required"})}
                     >
                       <option disabled value=""> Select Group Name</option>
@@ -216,7 +216,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
 
                  {/* type Input */}
                <div className="type-box grow">
-                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-gray-700"
                     {...register("type",{required:"Question Type Is Required"})}
                     >
                       <option disabled value=""> Select Question Type</option>
@@ -230,7 +230,7 @@ const minDateValue = minDate.toISOString().slice(0, 16);
 
                  {/* level Input */}
                <div className="level-box grow">
-                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl"
+                    <select  defaultValue="" className=" p-2 w-full outline-0 border-2 border-main-border-color rounded-2xl dark:bg-gray-700"
                     {...register("difficulty",{required:"Question Level Is Required"})}
                     >
                       <option disabled value=""> Select Question Level</option>
