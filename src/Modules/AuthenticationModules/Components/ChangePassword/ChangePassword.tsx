@@ -71,9 +71,9 @@ const toastId = toast.loading("Waiting...")
 
   return (
     <div className="section  justify-center flex">
-      <div className="change-password-parent p-6 w-full md:w-1/2 min-h-[80vh] shadow-2xl bg-emerald-700 mt-4 rounded-2xl">
+      <div className="change-password-parent p-6 w-full md:w-1/2 min-h-[80vh] dark:shadow-2xl mt-4 rounded-2xl bg-white dark:bg-gray-800 text-gray-700 dark:text-white shadow-2xl">
         <div className="change-password-header">
-          <h2 className=" text-3xl font-black mt-5 text-white text-center mb-3">Change Password</h2>
+          <h2 className=" text-3xl font-black mt-5 text-center mb-3">Change Password</h2>
         </div>
       
 
@@ -89,12 +89,12 @@ const toastId = toast.loading("Waiting...")
           
 
                   {/*old Password input */}
-               <div className="password-input relative flex-1 text-white">
+               <div className="password-input relative flex-1">
                 <label className="block mb-1" htmlFor="oldpassword">OldPassword</label>
                      <div className="relative">
                        <input
                       {...register("password",PASSWORD_VALIDATION)}
-                      className="form-control" id="oldpassword" type={showOldPassword?"text":"password"} placeholder="Type Your Old Password" />
+                      className="form-control border-gray-600" id="oldpassword" type={showOldPassword?"text":"password"} placeholder="Type Your Old Password" />
                               <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
                               <i title={showOldPassword?"Hide Password":"Show Password"} onClick={()=>{setShowOldPassword(current=> !current)}} className={`fa-solid ${!showOldPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
                      </div>
@@ -105,12 +105,12 @@ const toastId = toast.loading("Waiting...")
 
 
                      {/*new Password input */}
-               <div className="password-input relative flex-1 text-white">
+               <div className="password-input relative flex-1">
                 <label className="block mb-1" htmlFor="newpassword">New Password</label>
                      <div className="relative">
                        <input
                       {...register("password_new",NEW_PASSWORD_VALIDATION(watch))}
-                      className="form-control" id="newpassword" type={showNewPassword?"text":"password"} placeholder="Type Your New Password" />
+                      className="form-control border-gray-700" id="newpassword" type={showNewPassword?"text":"password"} placeholder="Type Your New Password" />
                               <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
                               <i title={showNewPassword?"Hide Password":"Show Password"} onClick={()=>{setShowNewPassword(current=> !current)}} className={`fa-solid ${!showNewPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
                      </div>
@@ -126,7 +126,7 @@ const toastId = toast.loading("Waiting...")
 {errorMessage && <p className="text-red-600 font-medium text-center">{errorMessage}</p>
 }
                   {/* submit btn */}
-                  <button disabled={isSubmitting} type="submit" className="auth-btn"> {isSubmitting ? <i className="fa-solid fa-circle-notch fa-spin"></i> :"Change Password"}</button>
+                  <button disabled={isSubmitting} type="submit" className="auth-btn bg-gray-800 text-white dark:bg-blue-700 dark:text-white dark:border-gray-700"> {isSubmitting ? <i className="fa-solid fa-circle-notch fa-spin"></i> :"Change Password"}</button>
           </form>
         </div>
       </div>
