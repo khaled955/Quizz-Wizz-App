@@ -3,7 +3,7 @@
 
 
 import { MdClose,  MdOutlineQuiz } from "react-icons/md";
-import { FaTrash, FaEdit, FaListUl } from "react-icons/fa";
+import { FaTrash,  FaListUl } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { UpcommingQuizzProps } from "../../../../../Interfaces/quizz.interface";
 import { format } from "date-fns";
@@ -18,7 +18,6 @@ interface Props {
 export default function QuizzesDetails({
   quiz,
   onClose,
-  onEdit,
   onDelete,
 }: Props) {
   return (
@@ -113,13 +112,7 @@ export default function QuizzesDetails({
 
         {/* Action Buttons */}
         <div className="mt-6 flex justify-end gap-4">
-          <button
-            onClick={() => onEdit(quiz)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
-          >
-            <FaEdit />
-            Edit
-          </button>
+       
           <button
             onClick={() => onDelete(quiz._id)}
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
