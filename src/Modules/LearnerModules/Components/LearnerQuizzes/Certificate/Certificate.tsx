@@ -6,16 +6,14 @@ import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import signatue from "../../../../../../public/images/signature-nadia.png"
-import { useLocation} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 
 
 
 export default function Certificate() {
   const { logedInData } = useAuth();
+const navigate = useNavigate()
 
-const x = useLocation()
-
-console.log(x)
 
 
   const{state:{score,title}} = useLocation()
@@ -128,6 +126,7 @@ const buttonRef = useRef<HTMLButtonElement>(null);
       ref={buttonRef}
       onClick={ async ()=>{
          await handleDownload() 
+         navigate("/learner")
      }}
        className=" cursor-pointer mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md absolute bottom-3"     >
      Download PDF
