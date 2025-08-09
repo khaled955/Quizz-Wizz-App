@@ -165,7 +165,7 @@ useEffect(() => {
         </div>
    {errors.students && <p className="error-message mb-3 ml-3">{errors.students.message}</p>}
 
-{errorMessage && <p className="error-message text-black text-center mb-3 ml-3">{errorMessage}</p>}
+{errorMessage && <p className="error-message text-black text-center mb-3 ml-3 dark:text-white">{errorMessage}</p>}
       </form>
       </div>
     </div>

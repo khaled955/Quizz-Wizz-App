@@ -11,6 +11,7 @@ import Loading from "../../../../SharedModules/Pages/Loading/Loading";
 import Pagination from "../../../../SharedModules/Components/Pagination/Pagination";
 import DeleteConfirmModal from "../../../../SharedModules/Components/ConfirmationModel/ConfirmationModel";
 import { FaLayerGroup } from 'react-icons/fa';
+import { BiSolidPlusCircle } from "react-icons/bi";
 
 
 
@@ -194,7 +195,7 @@ if(!paginatedData) return <Loading/>
     
     {/* add btn */}
     <div className="add-btn text-end">
-        <button onClick={handleShowAddAndUpdateModel} className="addBtn"> <i className="fa-solid fa-circle-plus"></i> Add Group</button>
+        <button onClick={handleShowAddAndUpdateModel} className="addBtn"> <BiSolidPlusCircle className='inline text-xl'/> Add Group</button>
        </div>
 
       {/* body of component */}

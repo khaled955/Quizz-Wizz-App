@@ -22,7 +22,7 @@ export default function MultiSelectInput({
       {() => (
         <div className="relative mt-2 border border-main-border-color rounded-2xl">
           {/* Button */}
-          <Listbox.Button className="relative w-full cursor-pointer rounded-md border-none bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus:ring-1 focus:ring-amber-500 sm:text-sm dark:bg-blue-600">
+          <Listbox.Button className="relative w-full cursor-pointer rounded-2xl border-none bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus:ring-1 focus:ring-amber-500 sm:text-sm dark:bg-blue-600">
             {selected.length > 0
               ? `${selected.length} student(s) selected`
               : "Select Students"}
