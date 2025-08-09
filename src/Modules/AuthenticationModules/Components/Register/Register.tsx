@@ -7,6 +7,19 @@ import { isAxiosError } from "axios";
 import { AUTH } from "../../../../Services/endPoint";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION, FIRST_NAME_VALIDATION, LAST_NAME_VALIDATION, PASSWORD_VALIDATION, ROLE_VALIDATION } from "../../../../Services/validation";
+import { FaEnvelope, FaEyeSlash, FaKey, FaUser } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
+import { FaUserTag } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
+
+
+
+
+
+
+
+
 
 export default function Register() {
 const[showPassword , setShowPassword] = useState(false)
@@ -29,7 +42,6 @@ const toastId = toast.loading("Waiting...")
     
   }
         const {data} = await axiosInstance.request(options)
-         console.log(data)
          toast.success(data.message || "Account Created Successfully")
          setTimeout(()=>{
                 navigate("/login")
@@ -57,12 +69,14 @@ const toastId = toast.loading("Waiting...")
         <div className="navigate-btn my-6 flex gap-5 text-xl font-black flex-wrap justify-center md:justify-start">
           {/* login btn */}
         <Link className=" bg-[#333] rounded-2xl text-white border border-black flex justify-center items-center p-12 flex-col" to="/login">
-        <i className="fa-solid fa-user"></i>
+<FaUser/>
+
         <span>Sign In</span>
         </Link>
         {/* register btn */}
         <div className=" bg-[#333] rounded-2xl text-white  border-main-color border-4 flex justify-center items-center p-12 flex-col">
-        <i className="fa-solid fa-user-plus"></i>
+<FaUserPlus/>
+
         <span>Sign Up</span>
         </div>
         </div>
@@ -81,7 +95,8 @@ const toastId = toast.loading("Waiting...")
                        <input
                       {...register("first_name",FIRST_NAME_VALIDATION)}
                       className="form-control" id="firstName" type="text" placeholder="Type Your First Name" />
-                              <i className="fa-solid fa-user absolute top-[30%] left-3 text-lg"></i>
+                      <FaUser className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
                      </div>
                    {errors.first_name && <div className="text-red-500">{errors.first_name.message}</div>}
                </div>
@@ -95,7 +110,9 @@ const toastId = toast.loading("Waiting...")
                        <input
                       {...register("last_name" ,LAST_NAME_VALIDATION)}
                       className="form-control" id="lastName" type="text" placeholder="Type Your Last Name" />
-                              <i className="fa-solid fa-user absolute top-[30%] left-3 text-lg"></i>
+
+                                           <FaUser className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
                      </div>
                     {errors.last_name && <div className="text-red-500">{errors.last_name.message}</div>}
                </div>
@@ -110,7 +127,9 @@ const toastId = toast.loading("Waiting...")
                       {...register("email",EMAIL_VALIDATION)}
                       
                       className="form-control" id="email" type="email" placeholder="Type Your Email" />
-                              <i className="fa-solid fa-envelope absolute top-[30%] left-3 text-lg"></i>
+                                              <FaEnvelope className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
+
                      </div>
 
 {errors.email && <div className="text-red-500">{errors.email.message}</div>}
@@ -130,7 +149,9 @@ const toastId = toast.loading("Waiting...")
                     <option value="Student">Student</option>
                     <option value="Instructor">Instructor</option>
                   </select>
-                              <i className="fa-solid fa-user-tag absolute top-[30%] left-3 text-lg"></i>
+                                        <FaUserTag className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
+
                 </div>
 
 {errors.role && <div className="text-red-500">{errors.role.message}</div>}
@@ -146,8 +167,16 @@ const toastId = toast.loading("Waiting...")
                        <input
                       {...register("password",PASSWORD_VALIDATION)}
                       className="form-control" id="password" type={showPassword?"text":"password"} placeholder="Type Your Password" />
-                              <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
-                              <i title={showPassword?"Hide Password":"Show Password"} onClick={()=>{setShowPassword(current=> !current)}} className={`fa-solid ${!showPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
+                      <FaKey className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
+
+
+{showPassword &&  <FaEye onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+}
+                          
+{!showPassword &&  <FaEyeSlash onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+}
+                          
                      </div>
 
 

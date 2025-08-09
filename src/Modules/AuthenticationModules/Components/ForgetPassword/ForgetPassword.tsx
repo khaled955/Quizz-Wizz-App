@@ -7,6 +7,7 @@ import { isAxiosError } from "axios";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION } from "../../../../Services/validation";
 import { AUTH } from "../../../../Services/endPoint";
+import { FaEnvelope } from "react-icons/fa";
 
 export default function ForgetPassword() {
 const[errorMessage , setErrorMessage] = useState<string | null>(null)
@@ -74,7 +75,9 @@ const toastId = toast.loading("Waiting...")
                       {...register("email",EMAIL_VALIDATION)}
                       
                       className="form-control" id="email" type="email" placeholder="Type Your Email" />
-                              <i className="fa-solid fa-envelope absolute top-[30%] left-3 text-lg"></i>
+
+                                                                         <FaEnvelope className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+                               
                      </div>
 
 {errors.email && <div className="text-red-500">{errors.email.message}</div>}

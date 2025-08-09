@@ -7,6 +7,7 @@ import { isAxiosError } from "axios";
 import { AUTH } from "../../../../Services/endPoint";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { NEW_PASSWORD_VALIDATION, PASSWORD_VALIDATION } from "../../../../Services/validation";
+import { FaEye, FaEyeSlash, FaKey } from "react-icons/fa";
 
 export default function ChangePassword() {
 const[showOldPassword , setShowOldPassword] = useState(false)
@@ -96,7 +97,21 @@ const toastId = toast.loading("Waiting...")
                       {...register("password",PASSWORD_VALIDATION)}
                       className="form-control border-gray-600" id="oldpassword" type={showOldPassword?"text":"password"} placeholder="Type Your Old Password" />
                               <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
-                              <i title={showOldPassword?"Hide Password":"Show Password"} onClick={()=>{setShowOldPassword(current=> !current)}} className={`fa-solid ${!showOldPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
+
+
+                                        <FaKey className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+                          
+                          
+                          
+                          {showOldPassword &&  <FaEye onClick={()=>{setShowOldPassword(current=> !current)}} title={showOldPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                          }
+                                                    
+                          {!showOldPassword &&  <FaEyeSlash onClick={()=>{setShowOldPassword(current=> !current)}} title={showOldPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                          }
+                          
+
+
+
                      </div>
 
 
@@ -113,6 +128,19 @@ const toastId = toast.loading("Waiting...")
                       className="form-control border-gray-700" id="newpassword" type={showNewPassword?"text":"password"} placeholder="Type Your New Password" />
                               <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
                               <i title={showNewPassword?"Hide Password":"Show Password"} onClick={()=>{setShowNewPassword(current=> !current)}} className={`fa-solid ${!showNewPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
+
+
+                                         <FaKey className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+                          
+                          
+                          
+                          {showNewPassword &&  <FaEye onClick={()=>{setShowNewPassword(current=> !current)}} title={showNewPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                          }
+                                                    
+                          {!showNewPassword &&  <FaEyeSlash onClick={()=>{setShowNewPassword(current=> !current)}} title={showNewPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                          }
+
+
                      </div>
 
 

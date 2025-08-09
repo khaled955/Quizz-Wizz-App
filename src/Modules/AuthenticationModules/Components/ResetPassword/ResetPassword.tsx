@@ -7,13 +7,14 @@ import { isAxiosError } from "axios";
 import { AUTH } from "../../../../Services/endPoint";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION, OTP_VALIDATION, PASSWORD_VALIDATION } from "../../../../Services/validation";
+import { FaEnvelope, FaEye, FaEyeSlash, FaKey } from "react-icons/fa";
 
 export default function ResetPassword() {
 const[showPassword , setShowPassword] = useState(false)
 const[errorMessage , setErrorMessage] = useState<string | null>(null)
 const navigate = useNavigate()
-const {state:{email}} = useLocation()
-const{register , handleSubmit , formState:{errors ,isSubmitting}} = useForm<ResetPasswordProps>({"mode":"onChange" ,defaultValues:{email}})
+const {state} = useLocation()
+const{register , handleSubmit , formState:{errors ,isSubmitting}} = useForm<ResetPasswordProps>({"mode":"onChange" ,defaultValues:{email:state?.email||""}})
 
 
 const handleResetPassword = useCallback(async function(dataInfo:ResetPasswordProps){
@@ -69,11 +70,12 @@ const toastId = toast.loading("Waiting...")
                <div className="email-input relative flex-1 text-white">
                 <label className="block mb-1" htmlFor="email">Email</label>
                      <div className="relative">
-                       <input readOnly
+                       <input readOnly={state?.email}
                       {...register("email",EMAIL_VALIDATION)}
                       
                       className="form-control" id="email" type="email" placeholder="Type Your Email" />
-                              <i className="fa-solid fa-envelope absolute top-[30%] left-3 text-lg"></i>
+                                                                    <FaEnvelope className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
                      </div>
 
 {errors.email && <div className="text-red-500">{errors.email.message}</div>}
@@ -88,7 +90,8 @@ const toastId = toast.loading("Waiting...")
                       {...register("otp" ,OTP_VALIDATION)}
                       
                       className="form-control" id="otp" type="text" placeholder="Type Your OTP" />
-                              <i className="fa-solid fa-envelope absolute top-[30%] left-3 text-lg"></i>
+                      <FaEnvelope className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+                      
                      </div>
 
 {errors.otp && <div className="text-red-500">{errors.otp.message}</div>}
@@ -105,8 +108,17 @@ const toastId = toast.loading("Waiting...")
                        <input
                       {...register("password",PASSWORD_VALIDATION)}
                       className="form-control" id="password" type={showPassword?"text":"password"} placeholder="Type Your Password" />
-                              <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
-                              <i title={showPassword?"Hide Password":"Show Password"} onClick={()=>{setShowPassword(current=> !current)}} className={`fa-solid ${!showPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
+                 <FaKey className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
+
+
+{showPassword &&  <FaEye onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+}
+                          
+{!showPassword &&  <FaEyeSlash onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+}
+
+
                      </div>
 
 

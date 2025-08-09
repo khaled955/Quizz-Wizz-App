@@ -9,6 +9,15 @@ import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from "../../../../Services/validation";
 import useAuth from "../../../../Hooks/useAuth";
 import Cookies from "js-cookie";
+import { FaUser } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+import { IoKeyOutline } from "react-icons/io5";
+
+
+
+
+
 
 export default function Login() {
 const[showPassword , setShowPassword] = useState(false)
@@ -72,14 +81,15 @@ const toastId = toast.loading("Waiting...")
           {/* login btn */}
 
        <div className=" bg-[#333] rounded-2xl text-white  border-main-color border-4 flex justify-center items-center p-12 flex-col">
-        <i className="fa-solid fa-user"></i>
+           <span><FaUser/></span>
         <span>Sign in</span>
         </div>
 
 
 
         <Link className=" bg-[#333] rounded-2xl text-white border border-black flex justify-center items-center p-12 flex-col" to="/register">
-        <i className="fa-solid fa-user-plus"></i>
+
+       <span><FaUserPlus/></span>
         <span>Sign In</span>
         </Link>
         {/* register btn */}
@@ -104,7 +114,8 @@ const toastId = toast.loading("Waiting...")
                       {...register("email",EMAIL_VALIDATION)}
                       
                       className="form-control" id="email" type="email" placeholder="Type Your Email" />
-                              <i className="fa-solid fa-envelope absolute top-[30%] left-3 text-lg"></i>
+                     <MdOutlineEmail className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
                      </div>
 
 {errors.email && <div className="text-red-500">{errors.email.message}</div>}
@@ -118,7 +129,9 @@ const toastId = toast.loading("Waiting...")
                        <input
                       {...register("password",PASSWORD_VALIDATION)}
                       className="form-control" id="password" type={showPassword?"text":"password"} placeholder="Type Your Password" />
-                              <i className="fa-solid fa-key absolute top-[30%] left-3 text-lg"></i>
+                                               <IoKeyOutline className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+
+
                               <i title={showPassword?"Hide Password":"Show Password"} onClick={()=>{setShowPassword(current=> !current)}} className={`fa-solid ${!showPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
                      </div>
 
