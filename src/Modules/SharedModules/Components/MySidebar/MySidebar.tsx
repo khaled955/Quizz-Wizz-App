@@ -1,6 +1,19 @@
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../../../../Hooks/useAuth';
+import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { IoIosArrowDropleftCircle } from "react-icons/io";
+import { RxDashboard } from "react-icons/rx";
+import { FaRegQuestionCircle } from "react-icons/fa";
+import { PiStudent } from "react-icons/pi";
+import { MdOutlineFreeCancellation } from "react-icons/md";
+import { MdGroups } from "react-icons/md";
+import { MdOutlineQuiz } from "react-icons/md";
+
+
+
+
+
 
 export default function MySidebar({ isCollapsed, handleToggleCollapse, darkMood }: { isCollapsed: boolean, handleToggleCollapse: () => void, darkMood: string | null }) {
   const { logedInData } = useAuth()
@@ -30,51 +43,56 @@ export default function MySidebar({ isCollapsed, handleToggleCollapse, darkMood 
             onClick={handleToggleCollapse}
             aria-label="Toggle sidebar collapse"
           >
-            <i
-              className={`fa-solid text-3xl ml-2 fa-circle-chevron-${isCollapsed ? 'left' : 'right'} transition-all duration-300 ${darkMood === "dark" ? "text-blue-400" : ""}`}
-              aria-hidden="true"
-            ></i>
+
+
+            
+
+
+             {isCollapsed && <IoIosArrowDroprightCircle className={`text-3xl ml-2 transition-all duration-300 ${darkMood === "dark" ? "text-blue-400" : ""}`}/>}
+             {!isCollapsed && <IoIosArrowDropleftCircle className={`text-3xl ml-2 transition-all duration-300 ${darkMood === "dark" ? "text-blue-400" : ""}`}/>}
+
+
           </MenuItem>
 
           {logedInData?.profile.role === "Instructor" && <>
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-grip text-2xl" aria-hidden="true"></i>}
+              icon={<RxDashboard className='text-2xl'/>}
               component={<Link to="/dashboard" />}
               aria-label="Instructor Dashboard"
             > Dashboard</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard/questions-list" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard/questions-list" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-circle-question text-2xl" aria-hidden="true"></i>}
+              icon={<FaRegQuestionCircle className='text-2xl'/>}
               component={<Link to="/dashboard/questions-list" />}
               aria-label="Questions"
             > Questions</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard/students" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard/students" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-users text-2xl" aria-hidden="true"></i>}
+              icon={<PiStudent className='text-2xl'/>}
               component={<Link to="/dashboard/students" />}
               aria-label="Students"
             > Students</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard/results" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard/results" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-square-poll-vertical text-2xl" aria-hidden="true"></i>}
+              icon={<MdOutlineFreeCancellation className='text-2xl'/>}
               component={<Link to="/dashboard/results" />}
               aria-label="Results"
             > Results</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard/groups-list" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard/groups-list" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-layer-group text-2xl" aria-hidden="true"></i>}
+              icon={<MdGroups className='text-2xl'/>}
               component={<Link to="/dashboard/groups-list" />}
               aria-label="Groups"
             > Groups</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/dashboard/quizzes" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/dashboard/quizzes" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-clipboard-question text-2xl" aria-hidden="true"></i>}
+              icon={<MdOutlineQuiz className='text-2xl'/>}
               component={<Link to="/dashboard/quizzes" />}
               aria-label="Quizzes"
             > Quizzes</MenuItem>
@@ -83,21 +101,21 @@ export default function MySidebar({ isCollapsed, handleToggleCollapse, darkMood 
           {logedInData?.profile.role === "Student" && <>
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/learner" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/learner" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-grip text-2xl" aria-hidden="true"></i>}
+              icon={<RxDashboard className='text-2xl'/>}
               component={<Link to="/learner" />}
               aria-label="Learner Dashboard"
             > Dashboard</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/learner/quizzes" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/learner/quizzes" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-clipboard-question text-2xl" aria-hidden="true"></i>}
+              icon={<MdOutlineQuiz className='text-2xl'/>}
               component={<Link to="/learner/quizzes" />}
               aria-label="Learner Quizzes"
             > Quizzes</MenuItem>
 
             <MenuItem
               className={`border-t-[1px] border-b-[1px] ${pathname === "/learner/results" && darkMood === "dark" ? "active-side-dark" : ""} ${pathname === "/learner/results" && darkMood !== "dark" ? "active-side-light" : ""}`}
-              icon={<i className="fa-solid fa-square-poll-vertical text-2xl" aria-hidden="true"></i>}
+              icon={<MdOutlineFreeCancellation className='text-2xl'/>}
               component={<Link to="/learner/results" />}
               aria-label="Learner Results"
             > Results</MenuItem>
