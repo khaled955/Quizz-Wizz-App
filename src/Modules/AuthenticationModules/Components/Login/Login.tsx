@@ -9,7 +9,7 @@ import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from "../../../../Services/validation";
 import useAuth from "../../../../Hooks/useAuth";
 import Cookies from "js-cookie";
-import { FaUser } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoKeyOutline } from "react-icons/io5";
@@ -131,9 +131,16 @@ const toastId = toast.loading("Waiting...")
                       {...register("password",PASSWORD_VALIDATION)}
                       className="form-control" id="password" type={showPassword?"text":"password"} placeholder="Type Your Password" />
                                                <IoKeyOutline className="absolute top-[50%] left-3 text-2xl -translate-y-[50%]"/>
+                             
+                              {showPassword &&  <FaEye onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                              }
+                                                        
+                              {!showPassword &&  <FaEyeSlash onClick={()=>{setShowPassword(current=> !current)}} title={showPassword?"Hide Password":"Show Password"} className="absolute top-[50%] right-3 text-lg cursor-pointer -translate-y-[50%]"/>
+                              }
 
 
-                              <i title={showPassword?"Hide Password":"Show Password"} onClick={()=>{setShowPassword(current=> !current)}} className={`fa-solid ${!showPassword ? "fa-eye-slash":"fa-eye"} absolute top-[30%] right-3 text-lg cursor-pointer`}></i>
+
+
                      </div>
 
 
