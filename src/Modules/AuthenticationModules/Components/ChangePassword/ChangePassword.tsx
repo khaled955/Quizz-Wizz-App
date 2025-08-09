@@ -8,6 +8,7 @@ import { AUTH } from "../../../../Services/endPoint";
 import { axiosInstance } from "../../../../Services/axiosInstance";
 import { NEW_PASSWORD_VALIDATION, PASSWORD_VALIDATION } from "../../../../Services/validation";
 import { FaEye, FaEyeSlash, FaKey } from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im";
 
 export default function ChangePassword() {
 const[showOldPassword , setShowOldPassword] = useState(false)
@@ -154,7 +155,7 @@ const toastId = toast.loading("Waiting...")
 {errorMessage && <p className="text-red-600 font-medium text-center">{errorMessage}</p>
 }
                   {/* submit btn */}
-                  <button disabled={isSubmitting} type="submit" className="auth-btn bg-gray-800 text-white dark:bg-blue-700 dark:text-white dark:border-gray-700"> {isSubmitting ? <i className="fa-solid fa-circle-notch fa-spin"></i> :"Change Password"}</button>
+                  <button disabled={isSubmitting} type="submit" className="auth-btn bg-gray-800 text-white dark:bg-blue-700 dark:text-white dark:border-gray-700 flex justify-center"> {isSubmitting ? <ImSpinner8 className="animate-spin text-black"/> :"Change Password"}</button>
           </form>
         </div>
       </div>

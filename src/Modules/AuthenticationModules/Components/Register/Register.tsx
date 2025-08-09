@@ -11,6 +11,7 @@ import { FaEnvelope, FaEyeSlash, FaKey, FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 import { FaUserTag } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im";
 
 
 
@@ -187,7 +188,7 @@ const toastId = toast.loading("Waiting...")
 {errorMessage && <p className="text-red-600 font-medium text-center">{errorMessage}</p>
 }
                   {/* submit btn */}
-                  <button disabled={isSubmitting} type="submit" className="auth-btn"> {isSubmitting ? <i className="fa-solid fa-circle-notch fa-spin"></i> :"Register"}</button>
+                  <button disabled={isSubmitting} type="submit" className="auth-btn flex justify-center"> {isSubmitting ? <ImSpinner8 className="animate-spin text-black"/> :"Register"}</button>
           </form>
         </div>
       </div>

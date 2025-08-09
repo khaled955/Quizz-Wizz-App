@@ -8,6 +8,7 @@ import { axiosInstance } from "../../../../Services/axiosInstance";
 import { EMAIL_VALIDATION } from "../../../../Services/validation";
 import { AUTH } from "../../../../Services/endPoint";
 import { FaEnvelope } from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im";
 
 export default function ForgetPassword() {
 const[errorMessage , setErrorMessage] = useState<string | null>(null)
@@ -89,7 +90,7 @@ const toastId = toast.loading("Waiting...")
 {errorMessage && <p className="text-red-600 font-medium text-center">{errorMessage}</p>
 }
                   {/* submit btn */}
-                  <button disabled={isSubmitting} type="submit" className="auth-btn"> {isSubmitting ? <i className="fa-solid fa-circle-notch fa-spin"></i> :"Send"}</button>
+                  <button disabled={isSubmitting} type="submit" className="auth-btn flex justify-center"> {isSubmitting ? <ImSpinner8 className="animate-spin text-black"/> :"Send"}</button>
           </form>
         </div>
       </div>
